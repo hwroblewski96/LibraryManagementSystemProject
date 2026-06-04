@@ -1,0 +1,59 @@
+@model LibraryManagementSystem.Models.Loan
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Loan</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="BookCopyId" class="control-label"></label>
+                <input asp-for="BookCopyId" class="form-control" />
+                <span asp-validation-for="BookCopyId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookCopy" class="control-label"></label>
+                <input asp-for="BookCopy" class="form-control" />
+                <span asp-validation-for="BookCopy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Czytelnik" class="control-label"></label>
+                <input asp-for="Czytelnik" class="form-control" />
+                <span asp-validation-for="Czytelnik" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataWypozyczenia" class="control-label"></label>
+                <input asp-for="DataWypozyczenia" class="form-control" />
+                <span asp-validation-for="DataWypozyczenia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TerminZwrotu" class="control-label"></label>
+                <input asp-for="TerminZwrotu" class="form-control" />
+                <span asp-validation-for="TerminZwrotu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataZwrotu" class="control-label"></label>
+                <input asp-for="DataZwrotu" class="form-control" />
+                <span asp-validation-for="DataZwrotu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

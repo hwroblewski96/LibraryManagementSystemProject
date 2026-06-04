@@ -1,0 +1,49 @@
+@model LibraryManagementSystem.Models.Loan
+
+@{
+    ViewData["Title"] = "Dodaj wypożyczenie";
+}
+
+<h1>Dodaj wypożyczenie</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="BookCopyId" class="control-label"></label>
+                <select asp-for="BookCopyId"
+                        class="form-control"
+                        asp-items="ViewBag.BookCopyId">
+                    <option value="">-- wybierz egzemplarz --</option>
+                </select>
+                <span asp-validation-for="BookCopyId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Czytelnik" class="control-label"></label>
+                <input asp-for="Czytelnik" class="form-control" />
+                <span asp-validation-for="Czytelnik" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Wypożycz" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div class="mt-3">
+    <a asp-action="Index">Powrót do listy</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

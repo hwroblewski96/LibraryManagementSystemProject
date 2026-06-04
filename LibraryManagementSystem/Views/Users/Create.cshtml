@@ -1,0 +1,54 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@{
+    ViewData["Title"] = "Dodaj użytkownika";
+}
+
+<h1>Dodaj użytkownika</h1>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
+<form asp-action="Create" method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="form-group mb-3">
+        <label>Email</label>
+        <input type="email" name="email" class="form-control" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Hasło</label>
+        <input type="password" name="password" class="form-control" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Imię</label>
+        <input type="text" name="imie" class="form-control" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Nazwisko</label>
+        <input type="text" name="nazwisko" class="form-control" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Rola</label>
+        <select name="role" class="form-control" asp-items="ViewBag.Roles"></select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Dodaj użytkownika
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Powrót
+    </a>
+</form>

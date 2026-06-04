@@ -1,0 +1,61 @@
+﻿@model IEnumerable<LibraryManagementSystem.Models.ApplicationUser>
+
+@{
+    ViewData["Title"] = "Użytkownicy";
+}
+
+<h1>Użytkownicy</h1>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Dodaj użytkownika</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Email</td>
+                <td>@user.Imie</td>
+                <td>@user.Nazwisko</td>
+                <td>
+                    @if (user.Email != "admin@biblioteka.pl")
+                    {
+                        <form asp-action="Delete"
+                              asp-route-id="@user.Id"
+                              method="post"
+                              style="display:inline">
+                            @Html.AntiForgeryToken()
+
+                            <button type="submit"
+                                    class="btn btn-sm btn-danger"
+                                    onclick="return confirm('Czy na pewno chcesz usunąć tego użytkownika?');">
+                                Usuń
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <span class="text-muted">Główny administrator</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

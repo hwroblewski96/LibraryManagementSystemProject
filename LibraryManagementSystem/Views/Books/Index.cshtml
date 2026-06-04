@@ -1,0 +1,61 @@
+@model IEnumerable<LibraryManagementSystem.Models.Book>
+
+@{
+    ViewData["Title"] = "Katalog książek";
+}
+
+<h1>Katalog książek</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">➕ Dodaj książkę</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Tytul)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Autor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ISBN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Opis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RokWydania)
+            </th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.Tytul)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Autor)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.ISBN)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.Opis)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.RokWydania)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

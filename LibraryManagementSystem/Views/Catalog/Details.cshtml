@@ -1,0 +1,37 @@
+﻿@model LibraryManagementSystem.Models.Book
+
+@{
+    ViewData["Title"] = "Szczegóły książki";
+}
+
+<h1>@Model.Tytul</h1>
+
+<hr />
+
+<div class="mb-3">
+    <strong>Autor:</strong> @Model.Autor
+</div>
+
+<div class="mb-3">
+    <strong>ISBN:</strong> @Model.ISBN
+</div>
+
+<div class="mb-3">
+    <strong>Rok wydania:</strong> @Model.RokWydania
+</div>
+
+<div class="mb-3">
+    <strong>Opis:</strong><br />
+    @Model.Opis
+</div>
+
+<div class="mb-3">
+    <strong>Dostępne egzemplarze:</strong>
+    @(Model.Egzemplarze?.Count(e => e.Dostepny) ?? 0)
+    /
+    @(Model.Egzemplarze?.Count ?? 0)
+</div>
+
+<a asp-action="Index" class="btn btn-secondary">
+    Powrót do katalogu
+</a>

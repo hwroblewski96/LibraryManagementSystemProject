@@ -13,20 +13,26 @@ namespace LibraryManagementSystem.Controllers
             _logger = logger;
         }
 
+        // Strona główna aplikacji
         public IActionResult Index()
         {
             return View();
         }
 
+        // Strona informacyjna
         public IActionResult Privacy()
         {
             return View();
         }
 
+        // Obsługa błędów aplikacji
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel
+            {
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            });
         }
     }
 }
