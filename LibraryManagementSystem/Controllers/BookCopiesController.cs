@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using LibraryManagementSystem.Models;
 using LibraryManagementSystem.Data;
 
-[Authorize(Roles = "Admin")]
+[Authorize]
 public class BookCopiesController : Controller
 {
     private readonly LibraryDbContext _context;
@@ -15,14 +15,12 @@ public class BookCopiesController : Controller
         _context = context;
     }
 
-    // GET: BookCopies
     public async Task<IActionResult> Index()
     {
         var bookCopies = _context.BookCopies.Include(b => b.Book);
         return View(await bookCopies.ToListAsync());
     }
 
-    // GET: BookCopies/Details/5
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null)
@@ -42,22 +40,23 @@ public class BookCopiesController : Controller
         return View(bookCopy);
     }
 
-    // GET: BookCopies/Create
     public IActionResult Create()
     {
         ViewData["BookId"] = new SelectList(_context.Books, "Id", "Tytul");
         return View();
     }
 
-    // POST: BookCopies/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([Bind("Id,BookId,Dostepny")] BookCopy bookCopy)
     {
         if (ModelState.IsValid)
         {
+            bookCopy.Dostepny = true;
+
             _context.Add(bookCopy);
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -65,7 +64,6 @@ public class BookCopiesController : Controller
         return View(bookCopy);
     }
 
-    // GET: BookCopies/Edit/5
     public async Task<IActionResult> Edit(int? id)
     {
         if (id == null)
@@ -81,10 +79,10 @@ public class BookCopiesController : Controller
         }
 
         ViewData["BookId"] = new SelectList(_context.Books, "Id", "Tytul", bookCopy.BookId);
+
         return View(bookCopy);
     }
 
-    // POST: BookCopies/Edit/5
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int? id, [Bind("Id,BookId,Dostepny")] BookCopy bookCopy)
@@ -115,10 +113,10 @@ public class BookCopiesController : Controller
         }
 
         ViewData["BookId"] = new SelectList(_context.Books, "Id", "Tytul", bookCopy.BookId);
+
         return View(bookCopy);
     }
 
-    // GET: BookCopies/Delete/5
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null)
@@ -138,7 +136,6 @@ public class BookCopiesController : Controller
         return View(bookCopy);
     }
 
-    // POST: BookCopies/Delete/5
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int? id)
@@ -151,6 +148,7 @@ public class BookCopiesController : Controller
         }
 
         await _context.SaveChangesAsync();
+
         return RedirectToAction(nameof(Index));
     }
 

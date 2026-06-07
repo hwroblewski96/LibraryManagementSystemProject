@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using LibraryManagementSystem.Models;
 using LibraryManagementSystem.Data;
 
-[Authorize(Roles = "Admin")]
+[Authorize]
 public class BooksController : Controller
 {
     private readonly LibraryDbContext _context;
@@ -14,13 +14,11 @@ public class BooksController : Controller
         _context = context;
     }
 
-    // GET: BOOKS
     public async Task<IActionResult> Index()
     {
         return View(await _context.Books.ToListAsync());
     }
 
-    // GET: BOOKS/Details/5
     public async Task<IActionResult> Details(int? id)
     {
         if (id == null)
@@ -39,13 +37,11 @@ public class BooksController : Controller
         return View(book);
     }
 
-    // GET: BOOKS/Create
     public IActionResult Create()
     {
         return View();
     }
 
-    // POST: BOOKS/Create
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create([Bind("Id,Tytul,Autor,ISBN,Opis,RokWydania")] Book book)
@@ -60,7 +56,6 @@ public class BooksController : Controller
         return View(book);
     }
 
-    // GET: BOOKS/Edit/5
     public async Task<IActionResult> Edit(int? id)
     {
         if (id == null)
@@ -78,7 +73,6 @@ public class BooksController : Controller
         return View(book);
     }
 
-    // POST: BOOKS/Edit/5
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int? id, [Bind("Id,Tytul,Autor,ISBN,Opis,RokWydania")] Book book)
@@ -111,7 +105,6 @@ public class BooksController : Controller
         return View(book);
     }
 
-    // GET: BOOKS/Delete/5
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null)
@@ -130,7 +123,6 @@ public class BooksController : Controller
         return View(book);
     }
 
-    // POST: BOOKS/Delete/5
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int? id)

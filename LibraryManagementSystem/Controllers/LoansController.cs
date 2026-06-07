@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using LibraryManagementSystem.Models;
 using LibraryManagementSystem.Data;
 
-[Authorize(Roles = "Admin")]
+[Authorize]
 public class LoansController : Controller
 {
     private readonly LibraryDbContext _context;

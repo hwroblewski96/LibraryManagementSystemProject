@@ -17,55 +17,45 @@
                 </a>
 
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-
                     <ul class="navbar-nav flex-grow-1">
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark"
-                               asp-controller="Home"
-                               asp-action="Index">
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">
                                 Strona główna
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark"
-                               asp-controller="Catalog"
-                               asp-action="Index">
+                            <a class="nav-link text-dark" asp-controller="Catalog" asp-action="Index">
                                 Katalog
                             </a>
                         </li>
 
-                        @if (User.IsInRole("Admin"))
+                        @if (User.Identity != null && User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark"
-                                   asp-controller="Books"
-                                   asp-action="Index">
+                                <a class="nav-link text-dark" asp-controller="Books" asp-action="Index">
                                     Zarządzanie książkami
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark"
-                                   asp-controller="BookCopies"
-                                   asp-action="Index">
+                                <a class="nav-link text-dark" asp-controller="BookCopies" asp-action="Index">
                                     Egzemplarze
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark"
-                                   asp-controller="Loans"
-                                   asp-action="Index">
+                                <a class="nav-link text-dark" asp-controller="Loans" asp-action="Index">
                                     Wypożyczenia
                                 </a>
                             </li>
+                        }
 
+                        @if (User.IsInRole("Admin"))
+                        {
                             <li class="nav-item">
-                                <a class="nav-link text-dark"
-                                   asp-controller="Users"
-                                   asp-action="Index">
+                                <a class="nav-link text-dark" asp-controller="Users" asp-action="Index">
                                     Użytkownicy
                                 </a>
                             </li>
@@ -84,14 +74,10 @@
                             </li>
 
                             <li class="nav-item">
-                                <form asp-controller="Account"
-                                      asp-action="Logout"
-                                      method="post">
-
+                                <form asp-controller="Account" asp-action="Logout" method="post">
                                     @Html.AntiForgeryToken()
 
-                                    <button type="submit"
-                                            class="btn btn-link nav-link text-dark">
+                                    <button type="submit" class="btn btn-link nav-link text-dark">
                                         Wyloguj
                                     </button>
                                 </form>
@@ -100,16 +86,13 @@
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark"
-                                   asp-controller="Account"
-                                   asp-action="Login">
+                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">
                                     Zaloguj
                                 </a>
                             </li>
                         }
 
                     </ul>
-
                 </div>
             </div>
         </nav>
